@@ -43,13 +43,14 @@ def main():
     print(Fore.BLUE + "username added", Fore.GREEN + "[*]")
     time.sleep(2)
 
-    # sprawdzanie sobie imienia
-    checker = driver.find_element(By.ID,'signup-usernameInputValidation')
+    checker = driver.find_element(By.ID, 'signup-usernameInputValidation')
     text = checker.get_attribute('textContent')
-    time.sleep(0.5)
 
     def check():
         while True:
+            checker = driver.find_element(By.ID, 'signup-usernameInputValidation')
+            text = checker.get_attribute('textContent')
+            time.sleep(3)
             if text == "This username is already in use.":
                 elem.clear()
                 elem.send_keys(generate_username(1)[0])
@@ -87,6 +88,7 @@ def main():
     time.sleep(1)
     file.write("{}      :{}     :{}\n".format(name, passs, driver.get_cookie('.ROBLOSECURITY')["value"]))
     file.close()
+    time.sleep(1)
     driver.delete_cookie('.ROBLOSECURITY')
     driver.get('https://www.roblox.com/')
     time.sleep(1)
